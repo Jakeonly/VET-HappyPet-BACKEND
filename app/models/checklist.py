@@ -1,6 +1,7 @@
 from database import Base
 from uuid import UUID, uuid4
-from sqlalchemy import Column, String, Int
+from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy.orm import relationship
 
 
 
@@ -11,6 +12,8 @@ class Checklist(Base):
     diagnosis = Column(String, index=True)
     treatment = Column(String, index=True)
     services = Column(String, index=True)
+    appointment_id = Column(UUID, ForeignKey('Appointment.id'), nullable=False, index=True)
+    appointment = relationship('Appointment', back_populates='checklists')
     
    
     

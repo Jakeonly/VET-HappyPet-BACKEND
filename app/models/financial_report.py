@@ -1,6 +1,7 @@
 from database import Base
 from uuid import UUID, uuid4
-from sqlalchemy import Column, String, Int
+from sqlalchemy import Column, Date, Numeric, ForeignKey
+from sqlalchemy.orm import relationship
 
 
 
@@ -10,8 +11,9 @@ class Financial_report(Base):
     id =  Column(UUID, primary_key=True, index=True, default=uuid4)
     dateStart = Column(Date, index=True)
     dateEnd = Column(Date, index=True)
-    income = Column(Decimal, index=True)
-    expenses = Column(Decimal, index=True)
+    income = Column(Numeric, index=True)
+    expenses = Column(Numeric, index=True)
+    sales = relationship('Sale', back_populates='financial_report')
    
     
 
